@@ -53,6 +53,9 @@
 bash <(wget -qO- https://raw.githubusercontent.com/fscarmen/argox/main/argox.sh)
 ```
 
+```
+wget https://raw.githubusercontent.com/zsdbbn/suoha-reality/main/suoha.sh -O suoha.sh && bash suoha.sh
+```
   | Option 参数 | Remark 备注 | 
   | -----------| ------ |
   | -c         | Chinese 中文 |
