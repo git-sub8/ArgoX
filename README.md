@@ -1,53 +1,53 @@
-# 【ArgoX】 = Argo + Xray
+#【ArgoX】 = Argo + Xray
 
 * * *
 
-# 目录
+# Table of contents
 
-- [更新信息](README.md#更新信息)
-- [项目特点](README.md#项目特点)
-- [ArgoX for VPS 运行脚本](README.md#argox-for-vps-运行脚本)
-- [Argo Json 的获取](README.md#argo-json-的获取)
-- [Argo Token 的获取](README.md#argo-token-的获取)
-- [免责声明](README.md#免责声明)
+- [Update information](README.md#Update information)
+- [Project Features](README.md#Project Features)
+- [ArgoX for VPS run script](README.md#argox-for-vps-run script)
+- [Get Argo Json](README.md#argo-json-Get)
+- [Getting Argo Token](README.md#argo-token-getting)
+- [Disclaimer](README.md#Disclaimer)
 
 * * *
-## 更新信息
-2023.4.13 1.0 正式版
+## Update information
+2023.4.13 1.0 official version
 
 <details>
-    <summary>历史更新 history（点击即可展开或收起）</summary>
+     <summary>History update history (click to expand or collapse)</summary>
 <br>
 
->2023.3.11 beta6 1. Users can easily obtain the JSON of a fixed domain name tunnel through the accompanying function website at https://fscarmen.cloudflare.now.cc ; 2. Change the sensitive path names; 3. Add CDN for download; 1. 用户可以通过配套的功能网轻松获取固定域名隧道的 json, https://fscarmen.cloudflare.now.cc;  2. 改掉敏感路径名; 3. 下载增加 CDN
+>2023.3.11 beta6 1. Users can easily obtain the JSON of a fixed domain name tunnel through the accompanying function website at https://fscarmen.cloudflare.now.cc; 2. Change the sensitive path names; 3. Add CDN for download; 1. Users can easily obtain the json of the fixed domain name tunnel through the supporting function network, https://fscarmen.cloudflare.now.cc; 2. Change the sensitive path name; 3. Download and add CDN
 >
->2023.3.4 beta5 1. Change listening to all network addresses to only Argo tunnel directed listening for added security; 2. Argo Tunnel supports dualstack; 1. 把对所有的网络地址监听改为只对 Argo 隧道作定向监听，以增加安全性; 2. Argo 隧道支持双栈
+>2023.3.4 beta5 1. Change listening to all network addresses to only Argo tunnel directed listening for added security; 2. Argo Tunnel supports dualstack; 1. Change listening to all network addresses to only Argo tunnel directed listening for added security; Increase security; 2. Argo tunnel supports dual stack
 >
->2023.3.2 beta4 Change listening to all network addresses to only Argo tunnel directed listening for added security; 把对所有的网络地址监听改为只对 Argo 隧道作定向监听，以增加安全性
+>2023.3.2 beta4 Change listening to all network addresses to only Argo tunnel directed listening for added security; Change listening to all network addresses to only Argo tunnel directed listening for added security;
 >
->2023.2.24 beta3 1. Simplify the operation of changing argo tunnel; 2. Use wget global instead of cURL; 1. 简化转换 Argo 隧道的方法; 2. 全局用 wget 替代 cURL
+>2023.2.24 beta3 1. Simplify the operation of changing argo tunnel; 2. Use wget global instead of cURL; 1. Simplify the method of converting Argo tunnel; 2. Use wget global instead of cURL
 >
 >2023.2.17 beta2 1. extremely fast installation mode, [-f] followed by a parameter file path; 2. Support for switching between the three argo tunnels; 3. Synchronise Argo and Xray to the latest version at any time; 4. Optimize the code to achieve speedup.
->1.极速安装模式，[-f] 后带参数文件路径；2.安装后，支持三种argo隧道随意切换；3.随时同步Argo 和 Xray到最新版本；4.优化代码，达到提速的目的。
+>1. Extremely fast installation mode, [-f] followed by parameter file path; 2. After installation, three argo tunnels are supported to switch at will; 3. Synchronize Argo and Xray to the latest version at any time; 4. Optimize the code to achieve speed improvement .
 </details>
 
 2023.2.16 beta1 Argo + Xray for vps
 
 
-## 项目特点:
+## Project Features:
 
-* 在 VPS 中部署 Xray，采用的方案为 Argo + Xray + WebSocket + TLS；
-* 正常用 CF 是访问机房回源，Argo 则是每次创建两个反向链接到两个就近机房，然后回源是通过源服务器就近机房回源，其中用户访问机房到源服务器连接的就近机房之间是CF自己的黑盒线路；
-* 使用 CloudFlare 的 Argo 隧道，使用TLS加密通信，可以将应用程序流量安全地传输到Cloudflare网络，提高了应用程序的安全性和可靠性。此外，Argo Tunnel也可以防止IP泄露和DDoS攻击等网络威胁；
-* Argo 是内网穿透的隧道，既 Xray 的 inbound 不对外暴露端口增加安全性，也不用做伪装网浪费资源，还支持 Cloudflare 的全部端口，不会死守443被封，同时服务端输出 Argo Ws 数据流，大大简化数据处理流程，提高响应，tls 由 cf 提供，避免多重 tls；
-* Argo 隧道既支持临时隧道，又支持通过 Token 或者 cloudflared Cli 方式申请的固定域名，直接优选 + 隧道，不需要申请域名证书，并可以在安装后随时转换；
-* 回落分流，同时支持 Xray 4 种主流协议: vless /  vmess / trojan / shadowsocks + WSS (ws + tls)；
-* vmess 和 vless 的 uuid，trojan 和 shadowsocks 的 password，各协议的 ws 路径既可以自定义，又或者使用默认值；
-* 节点信息以 V2rayN / Clash / 小火箭 链接方式输出；
-* 极速安装，即可交互式安装，也可像 docker compose 一样的非交互式安装，提前把所有的参数放到一个配置文件，全程不到5秒。
+* Deploy Xray in VPS, using the solution Argo + Xray + WebSocket + TLS;
+* Normally CF is used to access the computer room and return to the source. Argo creates two reverse links to two nearby computer rooms each time, and then the return to the origin is through the source server to the nearest computer room. The user accesses the computer room and connects to the nearest computer room connected to the source server. In between is CF’s own black box line;
+* Using CloudFlare's Argo tunnel, application traffic can be securely transmitted to the Cloudflare network using TLS encrypted communication, improving application security and reliability. In addition, Argo Tunnel can also prevent network threats such as IP leaks and DDoS attacks;
+* Argo is a tunnel that penetrates the internal network. Xray's inbound does not expose the port to the outside world to increase security, and there is no need to waste resources by camouflaging the network. It also supports all ports of Cloudflare and will not stick to 443 and be blocked. At the same time, the server outputs Argo Ws Data flow greatly simplifies the data processing process and improves response. TLS is provided by cf to avoid multiple TLS;
+* Argo tunnel supports both temporary tunnels and fixed domain names applied for through Token or cloudflared Cli. It is directly preferred + tunnel. There is no need to apply for a domain name certificate, and it can be converted at any time after installation;
+* Fall back to offloading, and support Xray’s 4 mainstream protocols at the same time: vless / vmess / trojan / shadowsocks + WSS (ws + tls);
+* The uuid of vmess and vless, the password of trojan and shadowsocks, and the ws path of each protocol can be customized or use the default value;
+* Node information is output in V2rayN / Clash / Little Rocket link mode;
+* Extremely fast installation, which can be installed interactively or non-interactively like docker compose. All parameters are put into a configuration file in advance, and the whole process takes less than 5 seconds.
 
 
-## ArgoX for VPS 运行脚本:
+## ArgoX for VPS run script:
 
 ```
 bash <(wget -qO- https://raw.githubusercontent.com/fscarmen/argox/main/argox.sh)
@@ -56,28 +56,28 @@ bash <(wget -qO- https://raw.githubusercontent.com/fscarmen/argox/main/argox.sh)
 ```
 wget https://raw.githubusercontent.com/zsdbbn/suoha-reality/main/suoha.sh -O suoha.sh && bash suoha.sh
 ```
-  | Option 参数 | Remark 备注 | 
-  | -----------| ------ |
-  | -c         | Chinese 中文 |
-  | -e         | English 英文 | 
-  | -f         | Variable file，refer to REPO file "config" 参数文件，可参数项目的文件 config | 
-  | -u         | Uninstall 卸载 |
-  | -e         | Export Node list 显示节点信息 |
-  | -v         | Sync Argo Xray to the newest 同步 Argo Xray 到最新版本 |
+   | Option parameters | Remark remarks |
+   | -----------| ------ |
+   | -c | Chinese 中文 |
+   | -e | English English |
+   | -f | Variable file, refer to REPO file "config" parameter file, file that can parameterize the project config |
+   | -u | Uninstall uninstall |
+   | -e | Export Node list displays node information |
+   | -v | Sync Argo Xray to the newest Synchronize Argo Xray to the latest version |
 
 
-## Argo Json 的获取
+## Argo Json acquisition
 
-用户可以通过 Cloudflare Json 生成网轻松获取: https://fscarmen.cloudflare.now.cc
+Users can easily obtain it through the Cloudflare Json generation network: https://fscarmen.cloudflare.now.cc
 
 ![image](https://user-images.githubusercontent.com/62703343/224388718-6adf22d0-01d3-46a0-8063-bc0a2210795f.png)
 
-如想手动，可以参考，以 Debian 为例，需要用到的命令，[Deron Cheng - CloudFlare Argo Tunnel 试用](https://zhengweidong.com/try-cloudflare-argo-tunnel)
+If you want to do it manually, you can refer to, taking Debian as an example, the commands you need to use, [Deron Cheng - CloudFlare Argo Tunnel trial](https://zhengweidong.com/try-cloudflare-argo-tunnel)
 
 
-## Argo Token 的获取
+## Obtaining Argo Token
 
-详细教程: [群晖套件：Cloudflare Tunnel 内网穿透中文教程 支持DSM6、7](https://imnks.com/5984.html)
+Detailed tutorial: [Synology Suite: Cloudflare Tunnel intranet penetration Chinese tutorial supports DSM6 and 7](https://imnks.com/5984.html)
 
 <img width="1409" alt="image" src="https://user-images.githubusercontent.com/92626977/218253461-c079cddd-3f4c-4278-a109-95229f1eb299.png">
 
@@ -86,6 +86,6 @@ wget https://raw.githubusercontent.com/zsdbbn/suoha-reality/main/suoha.sh -O suo
 <img width="1155" alt="image" src="https://user-images.githubusercontent.com/92626977/218253971-60f11bbf-9de9-4082-9e46-12cd2aad79a1.png">
 
 
-## 免责声明:
-* 本程序仅供学习了解, 非盈利目的，请于下载后 24 小时内删除, 不得用作任何商业用途, 文字、数据及图片均有所属版权, 如转载须注明来源。
-* 使用本程序必循遵守部署免责声明。使用本程序必循遵守部署服务器所在地、所在国家和用户所在国家的法律法规, 程序作者不对使用者任何不当行为负责。
+## Disclaimer:
+* This program is for learning and understanding only. It is for non-profit purposes. Please delete it within 24 hours after downloading. It may not be used for any commercial purposes. The text, data and pictures are copyrighted. If reproduced, the source must be indicated.
+* Use of this program must comply with the deployment disclaimer. The use of this program must comply with the laws and regulations of the country where the server is deployed, the country where it is located, and the country where the user is located. The program author is not responsible for any inappropriate behavior by the user.
